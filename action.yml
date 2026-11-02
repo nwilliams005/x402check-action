@@ -1,4 +1,4 @@
-name: x402check
+name: "x402check Endpoint Preflight"
 description: Check your x402 endpoints with x402check.dev; fail or warn if price, payTo, or network changed.
 author: nwilliams005
 branding:
