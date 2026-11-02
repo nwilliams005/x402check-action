@@ -1,0 +1,40 @@
+# Example workflow — copy into your repo as .github/workflows/x402check.yml
+name: x402check endpoints
+on:
+  push:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run x402check
+        id: x402
+        uses: nwilliams005/x402check-action@v1
+        with:
+          mode: fail
+          # Prefer free check once per payer wallet, then $0.01 Exact USDC on Base
+          use-free-check: "true"
+          payer-private-key: ${{ secrets.X402CHECK_PAYER_KEY }}
+          endpoints: |
+            [
+              {
+                "url": "https://your-agent.example/paid",
+                "expectedPriceUsd": 0.01,
+                "expectedPayTo": "0xYourPayTo",
+                "expectedNetwork": "eip155:8453"
+              }
+            ]
+          baseline-path: .x402check-baseline.json
+          write-baseline: "true"
+
+      - name: Upload baseline
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: x402check-baseline
+          path: .x402check-baseline.json

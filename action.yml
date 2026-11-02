@@ -1,0 +1,47 @@
+name: x402check
+description: Check your x402 endpoints with x402check.dev; fail or warn if price, payTo, or network changed.
+author: nwilliams005
+branding:
+  icon: shield
+  color: blue
+inputs:
+  endpoints:
+    description: >
+      JSON array of endpoint objects. Each item: { "url": "https://...", "expectedPriceUsd"?: number,
+      "expectedPayTo"?: "0x...", "expectedNetwork"?: "eip155:8453" }. Or a newline-separated list of URLs.
+    required: true
+  mode:
+    description: fail (exit non-zero on drift) or warn (annotations only)
+    required: false
+    default: fail
+  x402check-url:
+    description: x402check base URL
+    required: false
+    default: https://x402check.dev
+  use-free-check:
+    description: Try the one free regular check (signed challenge) before paying $0.01
+    required: false
+    default: "true"
+  payer-private-key:
+    description: 0x-prefixed hex key that pays for checks after free is used (repo secret)
+    required: false
+  baseline-path:
+    description: Path to previous-run JSON baseline (compare when expected* omitted)
+    required: false
+    default: .x402check-baseline.json
+  write-baseline:
+    description: Write/update baseline file after a successful run
+    required: false
+    default: "true"
+  deep:
+    description: If true, request a deep check ($0.05) instead of regular ($0.01)
+    required: false
+    default: "false"
+outputs:
+  results:
+    description: JSON array of check results
+  drifted:
+    description: "true" if any endpoint drifted from expected or baseline
+runs:
+  using: node20
+  main: src/main.js

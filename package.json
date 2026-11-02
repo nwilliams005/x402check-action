@@ -1,0 +1,23 @@
+{
+  "name": "x402check-action",
+  "version": "1.0.0",
+  "private": true,
+  "description": "GitHub Action: run x402check on your endpoints and fail/warn if price, payTo, or network drifts",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "node --test __tests__/*.test.js",
+    "start": "node src/main.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.1",
+    "viem": "^2.27.0",
+    "@x402/fetch": "2.29.0",
+    "@x402/evm": "2.29.0",
+    "@x402/core": "2.29.0"
+  }
+}

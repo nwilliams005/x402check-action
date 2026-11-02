@@ -1,0 +1,4 @@
+node_modules/
+.x402check-baseline.json
+.env
+*.log
