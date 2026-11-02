@@ -41,7 +41,7 @@ outputs:
   results:
     description: JSON array of check results
   drifted:
-    description: "true" if any endpoint drifted from expected or baseline
+    description: 'true if any endpoint drifted from expected or baseline'
 runs:
   using: node20
   main: src/main.js

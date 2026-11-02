@@ -24,7 +24,7 @@ If you operate x402 sellers, silent price or `payTo` changes are exactly what ag
       ]
 ```
 
-See [`.github/workflows/example.yml`](.github/workflows/example.yml).
+See [`examples/workflow.yml`](examples/workflow.yml).
 
 ### Inputs
 
